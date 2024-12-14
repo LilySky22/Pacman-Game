@@ -8,3 +8,9 @@
 ## I am extremely slow at programming even when following a tutorial and i'm still trying to figure out the best way to learn. In this project I have had to completely restart because I messed up
 
 ## demo link:
+
+
+### issues I have faced so far are: 
+#### Movement controls - the left arrow works perfectly, the others are glitchy, 
+#### Setting rules for ghosts - I have managed to get the ghosts to mmove randomly but this means they sometimes end up in walls, 
+#### Changing Sprites - I want to add my own designs for the ghosts and pacman, but becuase the tutorial has them as just a pixel I need to figure out how to fix that
