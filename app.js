@@ -206,18 +206,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }, ghost.speed)
     } 
 
+    function checkForGameOver() {
+        if (
+            squares[pacmanCurrentIndex].className.contains('ghost') && 
+            !squares[pacmanCurrentIndex].className.contains('scared-ghost')) {
+                ghosts.forEach(ghost => clearInterval(ghost.timerId))
+                document.removeEventListener('keyup', movePacman)
+                setTimeout(function() {alert('Game Over')} , 500)
+            }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
- 
+    function checkForWin() {
+        if (score >= 274) {
+            ghosts.forEach(ghost => clearInterval(ghost.timerId))
+            document.removeEventListener('keyup', movePacman)
+            setTimeout(function() {alert('You Win')} , 500)
+        }
+    }
 })
 
