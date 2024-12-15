@@ -14,3 +14,6 @@
 #### Movement controls - the left arrow works perfectly, the others are glitchy, 
 #### Setting rules for ghosts - I have managed to get the ghosts to mmove randomly but this means they sometimes end up in walls, 
 #### Changing Sprites - I want to add my own designs for the ghosts and pacman, but becuase the tutorial has them as just a pixel I need to figure out how to fix that
+
+### Fixes:
+#### Movement controls - The right and down arrow key had - instead of +
