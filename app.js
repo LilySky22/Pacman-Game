@@ -38,27 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const squares =  []
 
+    let totalPelletsScore = 0;
+
     function createBoard() {
         for (let i = 0; i < layout.length; i++) {
-            const square = document.createElement('div')
-            square.id = i
-            grid.appendChild(square)
-            squares.push(square)
+            const square = document.createElement('div');
+            square.id = i;
+            grid.appendChild(square);
+            squares.push(square);
 
             if (layout[i] === 0) {
-                squares[i].classList.add('pac-dot')
+                squares[i].classList.add('pac-dot');
+                totalPelletsScore += 1; // Pac-dots are worth 1 point
             }
             if (layout[i] === 1) {
-                squares[i].classList.add('wall')
+                squares[i].classList.add('wall');
             }
             if (layout[i] === 2) {
-                squares[i].classList.add('ghost-lair')
+                squares[i].classList.add('ghost-lair');
             }
             if (layout[i] === 3) {
-                squares[i].classList.add('power-pellet')
+                squares[i].classList.add('power-pellet');
+                totalPelletsScore += 10; // Power pellets are worth 10 points
             }
         }
     }
+
     createBoard()
 
 
@@ -162,17 +167,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    ghosts = [
+    const ghosts = [
         new Ghost ('blinky', 348, 250),
         new Ghost ('pinky', 376, 400),
         new Ghost ('inky', 351, 300),
         new Ghost ('clyde', 379, 500),
     ]
 
-    ghosts.forEach(ghost => {
-        squares[ghost.currentIndex].classList.add(ghost.className)
-        squares[ghost.currentIndex].classList.add('ghost')
-    })
+    ghosts.forEach(ghost => squares[ghost.currentIndex].classList.add(ghost.className, "ghost"))
+
+    function eatGhost(ghost) {
+        ghost.isScared = false
+        squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
+        ghost.currentIndex = ghost.startIndex
+        score += 100
+        scoreDisplay.innerHTML = score
+        squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+    }    
 
 
     ghosts.forEach(ghost => moveGhost(ghost)) 
@@ -195,33 +206,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (ghost.isScared && squares[ghost.currentIndex].classList.contains('pac-man')) {
-                squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
-                ghost.currentIndex = ghost.startIndex
-                score += 100
-                scoreDisplay.innerHTML = score
-                squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
+                eatGhost(ghost)
             }
+            
             checkForGameOver()
 
         }, ghost.speed)
     } 
 
     function checkForGameOver() {
-        if (
-            squares[pacmanCurrentIndex].className.contains('ghost') && 
-            !squares[pacmanCurrentIndex].className.contains('scared-ghost')) {
-                ghosts.forEach(ghost => clearInterval(ghost.timerId))
-                document.removeEventListener('keyup', movePacman)
-                setTimeout(function() {alert('Game Over')} , 500)
-            }
-    }
-
-    function checkForWin() {
-        if (score >= 274) {
-            ghosts.forEach(ghost => clearInterval(ghost.timerId))
-            document.removeEventListener('keyup', movePacman)
-            setTimeout(function() {alert('You Win')} , 500)
+        if (squares[pacmanCurrentIndex].classList.contains('ghost') &&
+            !squares[pacmanCurrentIndex].classList.contains('scared-ghost')) {
+            ghosts.forEach(ghost => clearInterval(ghost.timerId));
+            document.removeEventListener('keyup', movePacman);
+            setTimeout(function() { alert('Game Over'); }, 500);
         }
     }
+    
+    function checkForWin() {
+        if (score >= totalPelletsScore) { // Win condition based on total pellets score
+            ghosts.forEach(ghost => clearInterval(ghost.timerId));
+            document.removeEventListener('keyup', movePacman);
+            setTimeout(function () {
+                alert('You Win');
+            }, 500);
+        }
+    }    
+    
 })
 
