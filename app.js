@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = 28
     let score = 0
     const grid = document.querySelector('.grid')
-
+    // the level
     const layout = [
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
