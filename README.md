@@ -7,15 +7,17 @@
 
 ## I am extremely slow at programming even when following a tutorial and i'm still trying to figure out the best way to learn. In this project I have had to completely restart because I messed up
 
-## demo link:
+## demo link: https://pacmanhighseas.netlify.app/
 
 
 ### issues I have faced so far are: 
 #### Movement controls - the left arrow works perfectly, the others are glitchy, 
 #### Setting rules for ghosts - I have managed to get the ghosts to mmove randomly but this means they sometimes end up in walls, 
 #### Changing Sprites - I want to add my own designs for the ghosts and pacman, but becuase the tutorial has them as just a pixel I need to figure out how to fix that
-#### Game wont end - win loose functions are not working
+#### Game wont end - win lose functions are not working
 
 ### Fixes:
 #### Movement controls - The right and down arrow key had - instead of +
 #### Won't end - I had flawed logic nn my if statement (if == ghost and != ghost)
+#### changed sprites - I changed the CSS
+#### game ends but at the wrong time
